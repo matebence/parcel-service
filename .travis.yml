@@ -3,4 +3,3 @@ node_js:
   - 10.0
 before_script:
   - npm install
-  - npm run build

@@ -12,16 +12,12 @@ module.exports = (sequelize, Sequelize) => {
         },
         rating: {
             type:   Sequelize.ENUM,
-            values: [1, 2, 3, 4, 5],
+            values: ['1', '2', '3', '4', '5'],
             allowNull: false
         },
         image: {
             type: Sequelize.TEXT,
             allowNull: false
-        },
-        parcelId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-        },
+        }
     });
 };

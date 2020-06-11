@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    return sequelize.define("district", {
+    return sequelize.define("parcel", {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
@@ -11,14 +11,6 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
         },
         receiverId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-        },
-        categoryId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-        },
-        invoiceId: {
             type: Sequelize.INTEGER,
             allowNull: false,
         },
@@ -43,8 +35,8 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         canceled: {
-            type: Sequelize.TINYINT,
-            defaultValue: 0,
+            type: Sequelize.BOOLEAN,
+            defaultValue: false,
             allowNull: false,
         }
     });

@@ -1,8 +1,9 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('invoices', [{
-            name: 'John Doe',
-            isBetaMember: false
+            invoice: 'parcel-4-1-1591868749.pdf',
+            createdAt: new Date(),
+            updatedAt: new Date()
         }], {});
     },
 

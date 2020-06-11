@@ -24,7 +24,30 @@ exports.create = {
         }
         next()
     },
-    validate: [],
+    validate: [
+        check('description')
+            .matches(/[^\x00-\x7F]|[a-zA-Z0-9]|[$&:;=?@#.()%!-]/).withMessage(strings.RATING_DESCRIPTION_MATCHES),
+        check('rating')
+            .matches(/^[1-5]$/).withMessage(strings.RATING_RATING_MATCHES),
+        check('image')
+            .isBase64().withMessage(strings.RATING_IMAGE_BASE),
+        check('parcelId')
+            .isBase64().withMessage(strings.RATING_PARCEL_ID_INT),
+
+        (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({
+                    timestamp: new Date().toISOString(),
+                    message: strings.SERVER_VALIDATION_ERR,
+                    error: true,
+                    validations: errors.array(),
+                    nav: `${req.protocol}://${req.get('host')}`
+                });
+            }
+            next()
+        }
+    ],
     inDatabase: (req, res, next) => {
         return database.sequelize.transaction((t) => {
             return Ratings.create(req.body, {transaction: t});
@@ -106,7 +129,32 @@ exports.update = {
         }
         next()
     },
-    validate: [],
+    validate: [
+        check('id')
+            .isInt({min: 1}).withMessage(strings.RATING_ID_INT),
+        check('description')
+            .matches(/[^\x00-\x7F]|[a-zA-Z0-9]|[$&:;=?@#.()%!-]/).withMessage(strings.RATING_DESCRIPTION_MATCHES),
+        check('rating')
+            .matches(/^[1-5]$/).withMessage(strings.RATING_RATING_MATCHES),
+        check('image')
+            .isBase64().withMessage(strings.RATING_IMAGE_BASE),
+        check('parcelId')
+            .isBase64().withMessage(strings.RATING_PARCEL_ID_INT),
+
+        (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({
+                    timestamp: new Date().toISOString(),
+                    message: strings.SERVER_VALIDATION_ERR,
+                    error: true,
+                    validations: errors.array(),
+                    nav: `${req.protocol}://${req.get('host')}`
+                });
+            }
+            next()
+        }
+    ],
     inDatabase: (req, res, next) => {
         return database.sequelize.transaction((t) => {
             return Ratings.update(req.body, {

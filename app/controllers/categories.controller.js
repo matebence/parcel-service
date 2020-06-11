@@ -24,7 +24,25 @@ exports.create = {
         }
         next()
     },
-    validate: [],
+    validate: [
+        check('name')
+            .isLength({min: 3, max: 64}).withMessage(strings.CATEGORY_NAME_LENGHT)
+            .isAlpha(['sk-SK']).withMessage(strings.CATEGORY_NAME_ALPHA),
+
+        (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({
+                    timestamp: new Date().toISOString(),
+                    message: strings.SERVER_VALIDATION_ERR,
+                    error: true,
+                    validations: errors.array(),
+                    nav: `${req.protocol}://${req.get('host')}`
+                });
+            }
+            next()
+        }
+    ],
     inDatabase: (req, res, next) => {
         return database.sequelize.transaction((t) => {
             return Categories.create(req.body, {transaction: t});
@@ -115,7 +133,27 @@ exports.update = {
         }
         next()
     },
-    validate: [],
+    validate: [
+        check('id')
+            .isInt({min: 1}).withMessage(strings.CATEGORY_ID_INT),
+        check('name')
+            .isLength({min: 3, max: 64}).withMessage(strings.CATEGORY_NAME_LENGHT)
+            .isAlpha(['sk-SK']).withMessage(strings.CATEGORY_NAME_ALPHA),
+
+        (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({
+                    timestamp: new Date().toISOString(),
+                    message: strings.SERVER_VALIDATION_ERR,
+                    error: true,
+                    validations: errors.array(),
+                    nav: `${req.protocol}://${req.get('host')}`
+                });
+            }
+            next()
+        }
+    ],
     inDatabase: (req, res, next) => {
         return database.sequelize.transaction((t) => {
             return Categories.update(req.body, {

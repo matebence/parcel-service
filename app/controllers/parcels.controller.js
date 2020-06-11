@@ -26,7 +26,40 @@ exports.create = {
         }
         next()
     },
-    validate: [],
+    validate: [
+        check('senderId')
+            .isInt({min: 1}).withMessage(strings.PARCEL_SENDER_ID_INT),
+        check('receiverId')
+            .isInt({min: 1}).withMessage(strings.PARCEL_RECEIVER_ID_INT),
+        check('categoryId')
+            .isInt({min: 1}).withMessage(strings.PARCEL_CATEGORY_ID_INT),
+        check('length')
+            .isFloat().withMessage(strings.PARCEL_LENGHT_FLOAT),
+        check('width')
+            .isFloat().withMessage(strings.PARCEL_WIDTH_FLOAT),
+        check('height')
+            .isFloat().withMessage(strings.PARCEL_HEIGHT_FLOAT),
+        check('weight')
+            .isFloat().withMessage(strings.PARCEL_WEIGHT_FLOAT),
+        check('note')
+            .matches(/[^\x00-\x7F]|[a-zA-Z0-9]|[$&:;=?@#.()%!-]/).withMessage(strings.PARCEL_NOTE_MATCHES),
+        check('canceled')
+            .isBoolean().withMessage(strings.PARCEL_CANCELED_BOOLEAN),
+
+        (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({
+                    timestamp: new Date().toISOString(),
+                    message: strings.SERVER_VALIDATION_ERR,
+                    error: true,
+                    validations: errors.array(),
+                    nav: `${req.protocol}://${req.get('host')}`
+                });
+            }
+            next()
+        }
+    ],
     inDatabase: (req, res, next) => {
         return database.sequelize.transaction((t) => {
             return Parcels.create(req.body, {transaction: t});
@@ -71,7 +104,7 @@ exports.delete = {
             return Promise.all([
                 Parcels.destroy({where: {id: req.params.id}}, {transaction: t}),
                 Ratings.destroy({where: {parcelId: req.params.id}}, {transaction: t}),
-                Invoices.destroy({where: {id: req.params.id}}, {transaction: t})
+                Invoices.destroy({where: {parcelId: req.params.id}}, {transaction: t})
             ]);
         }).then(num => {
             if (num.every(number => number > 0)) {
@@ -110,7 +143,42 @@ exports.update = {
         }
         next()
     },
-    validate: [],
+    validate: [
+        check('id')
+            .isInt({min: 1}).withMessage(strings.PARCEL_ID_INT),
+        check('senderId')
+            .isInt({min: 1}).withMessage(strings.PARCEL_SENDER_ID_INT),
+        check('receiverId')
+            .isInt({min: 1}).withMessage(strings.PARCEL_RECEIVER_ID_INT),
+        check('categoryId')
+            .isInt({min: 1}).withMessage(strings.PARCEL_CATEGORY_ID_INT),
+        check('length')
+            .isFloat().withMessage(strings.PARCEL_LENGHT_FLOAT),
+        check('width')
+            .isFloat().withMessage(strings.PARCEL_WIDTH_FLOAT),
+        check('height')
+            .isFloat().withMessage(strings.PARCEL_HEIGHT_FLOAT),
+        check('weight')
+            .isFloat().withMessage(strings.PARCEL_WEIGHT_FLOAT),
+        check('note')
+            .matches(/[^\x00-\x7F]|[a-zA-Z0-9]|[$&:;=?@#.()%!-]/).withMessage(strings.PARCEL_NOTE_MATCHES),
+        check('canceled')
+            .isBoolean().withMessage(strings.PARCEL_CANCELED_BOOLEAN),
+
+        (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({
+                    timestamp: new Date().toISOString(),
+                    message: strings.SERVER_VALIDATION_ERR,
+                    error: true,
+                    validations: errors.array(),
+                    nav: `${req.protocol}://${req.get('host')}`
+                });
+            }
+            next()
+        }
+    ],
     inDatabase: (req, res, next) => {
         return database.sequelize.transaction((t) => {
             return Parcels.update(req.body, {

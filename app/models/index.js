@@ -13,8 +13,7 @@ module.exports = (app, config) => {
         }
     });
 
-    sequelize.sync({force: false}).then(result => {
-    // sequelize.sync({force: config.get('node.sequelize.create-drop')}).then(result => {
+    sequelize.sync({force: config.get('node.sequelize.create-drop')}).then(result => {
         console.log(strings.DATABASE_STRUCTURE)
     }).catch(error => {
         console.log(error)
@@ -30,13 +29,13 @@ module.exports = (app, config) => {
     database.parcels = require("./parcels.model")(sequelize, Sequelize);
     database.ratings = require("./ratings.model")(sequelize, Sequelize);
 
-    database.invoices.hasOne(database.parcels, {foreignKey: 'invoiceId', constraints: true});
+    database.parcels.hasOne(database.invoices, {foreignKey: 'parcelId', constraints: true});
     database.categories.hasOne(database.parcels, {foreignKey: 'categoryId', constraints: true});
     database.parcels.hasOne(database.ratings, {foreignKey: 'parcelId', constraints: true});
 
     database.ratings.belongsTo(database.parcels);
     database.parcels.belongsTo(database.categories);
-    database.parcels.belongsTo(database.invoices);
+    database.invoices.belongsTo(database.parcels);
 
     module.exports = database;
 };

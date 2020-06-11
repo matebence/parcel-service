@@ -13,7 +13,8 @@ module.exports = (app, config) => {
         }
     });
 
-    sequelize.sync({force: config.get('node.sequelize.create-drop')}).then(result => {
+    sequelize.sync({force: false}).then(result => {
+    // sequelize.sync({force: config.get('node.sequelize.create-drop')}).then(result => {
         console.log(strings.DATABASE_STRUCTURE)
     }).catch(error => {
         console.log(error)
@@ -32,6 +33,10 @@ module.exports = (app, config) => {
     database.invoices.hasOne(database.parcels, {foreignKey: 'invoiceId', constraints: true});
     database.categories.hasOne(database.parcels, {foreignKey: 'categoryId', constraints: true});
     database.parcels.hasOne(database.ratings, {foreignKey: 'parcelId', constraints: true});
+
+    database.ratings.belongsTo(database.parcels);
+    database.parcels.belongsTo(database.categories);
+    database.parcels.belongsTo(database.invoices);
 
     module.exports = database;
 };

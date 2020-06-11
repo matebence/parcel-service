@@ -4,7 +4,6 @@ module.exports = {
             senderId: 4,
             receiverId: 6,
             categoryId: 3,
-            invoiceId: 1,
             length: 15,
             width: 10,
             height: 5,

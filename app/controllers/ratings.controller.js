@@ -11,6 +11,14 @@ const DEFAULT_PAGE_NUMBER = 1;
 
 exports.create = {
     authorize: (req, res, next) => {
+        if (!req.hasRole(['ROLE_SYSTEM', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CLIENT']) && !req.hasPrivilege(['CREATE_RATINGS'])) {
+            return res.status(401).json({
+                timestamp: new Date().toISOString(),
+                message: strings.AUTH_ERR,
+                error: true,
+                nav: `${req.protocol}://${req.get('host')}`
+            });
+        }
         next()
     },
     checkBody: (req, res, next) => {
@@ -67,6 +75,14 @@ exports.create = {
 
 exports.delete = {
     authorize: (req, res, next) => {
+        if (!req.hasRole(['ROLE_SYSTEM', 'ROLE_ADMIN', 'ROLE_MANAGER']) && !req.hasPrivilege(['DELETE_RATINGS'])) {
+            return res.status(401).json({
+                timestamp: new Date().toISOString(),
+                message: strings.AUTH_ERR,
+                error: true,
+                nav: `${req.protocol}://${req.get('host')}`
+            });
+        }
         next()
     },
     validate: [
@@ -116,6 +132,14 @@ exports.delete = {
 
 exports.update = {
     authorize: (req, res, next) => {
+        if (!req.hasRole(['ROLE_SYSTEM', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CLIENT']) && !req.hasPrivilege(['UPDATE_RATINGS'])) {
+            return res.status(401).json({
+                timestamp: new Date().toISOString(),
+                message: strings.AUTH_ERR,
+                error: true,
+                nav: `${req.protocol}://${req.get('host')}`
+            });
+        }
         next()
     },
     checkBody: (req, res, next) => {
@@ -184,6 +208,14 @@ exports.update = {
 
 exports.get = {
     authorize: (req, res, next) => {
+        if (!req.hasRole(['ROLE_SYSTEM', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CLIENT']) && !req.hasPrivilege(['VIEW_RATINGS'])) {
+            return res.status(401).json({
+                timestamp: new Date().toISOString(),
+                message: strings.AUTH_ERR,
+                error: true,
+                nav: `${req.protocol}://${req.get('host')}`
+            });
+        }
         next()
     },
     validate: [
@@ -235,6 +267,14 @@ exports.get = {
 
 exports.getAll = {
     authorize: (req, res, next) => {
+        if (!req.hasRole(['ROLE_SYSTEM', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CLIENT']) && !req.hasPrivilege(['VIEW_RATINGS'])) {
+            return res.status(401).json({
+                timestamp: new Date().toISOString(),
+                message: strings.AUTH_ERR,
+                error: true,
+                nav: `${req.protocol}://${req.get('host')}`
+            });
+        }
         next()
     },
     validate: [
@@ -291,6 +331,14 @@ exports.getAll = {
 
 exports.search = {
     authorize: (req, res, next) => {
+        if (!req.hasRole(['ROLE_SYSTEM', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CLIENT']) && !req.hasPrivilege(['VIEW_RATINGS'])) {
+            return res.status(401).json({
+                timestamp: new Date().toISOString(),
+                message: strings.AUTH_ERR,
+                error: true,
+                nav: `${req.protocol}://${req.get('host')}`
+            });
+        }
         next()
     },
     checkBody: (req, res, next) => {

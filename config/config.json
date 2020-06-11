@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "prl_user",
+    "password": "5773774e6386261fe36f94dad0262fe9",
+    "database": "parcel_service",
+    "host": "192.168.99.100",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}

@@ -23,5 +23,18 @@ module.exports = (app, config) => {
     database.Sequelize = Sequelize;
     database.sequelize = sequelize;
 
+    database.categories = require("./categories.model")(sequelize, Sequelize);
+    database.invoices = require("./invoices.model")(sequelize, Sequelize);
+    database.parcels = require("./parcels.model")(sequelize, Sequelize);
+    database.ratings = require("./ratings.model")(sequelize, Sequelize);
+
+    database.parcels.hasOne(database.invoices);
+    database.parcels.hasOne(database.categories);
+    database.parcels.belongsTo(database.ratings);
+
+    database.invoices.belongsTo(database.parcels);
+
+    database.ratings.hasOne(database.parcels);
+
     module.exports = database;
 };

@@ -1,8 +1,8 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('parcels', [{
-            senderId: 4,
-            receiverId: 6,
+            senderId: 3,
+            receiverId: 5,
             categoryId: 3,
             length: 15,
             width: 10,

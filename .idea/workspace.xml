@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dffca381-81f7-4fdc-9628-945a04bd3646" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/categories.controller.js" afterPath="$PROJECT_DIR$/app/controllers/categories.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/invoices.controllers.js" afterPath="$PROJECT_DIR$/app/controllers/invoices.controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/parcels.controller.js" afterPath="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/ratings.controller.js" afterPath="$PROJECT_DIR$/app/controllers/ratings.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/categories.routes.js" afterPath="$PROJECT_DIR$/app/routes/categories.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/invoices.routes.js" afterPath="$PROJECT_DIR$/app/routes/invoices.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/parcels.routes.js" afterPath="$PROJECT_DIR$/app/routes/parcels.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/ratings.routes.js" afterPath="$PROJECT_DIR$/app/routes/ratings.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/strings.js" afterPath="$PROJECT_DIR$/resources/strings.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Dockerfile" afterPath="$PROJECT_DIR$/Dockerfile" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -113,7 +104,6 @@
         <option value="$PROJECT_DIR$/seeders/20200611090606-parcels.js" />
         <option value="$PROJECT_DIR$/app/models/index.js" />
         <option value="$PROJECT_DIR$/app/routes/auth.routes.js" />
-        <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/app/routes/categories.routes.js" />
         <option value="$PROJECT_DIR$/app/routes/ratings.routes.js" />
         <option value="$PROJECT_DIR$/app/routes/parcels.routes.js" />
@@ -123,6 +113,7 @@
         <option value="$PROJECT_DIR$/app/controllers/invoices.controllers.js" />
         <option value="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
         <option value="$PROJECT_DIR$/app/controllers/ratings.controller.js" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
       </list>
     </option>
   </component>
@@ -162,8 +153,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -334,11 +325,12 @@
       <workItem from="1592157696186" duration="612000" />
       <workItem from="1592215157060" duration="5302000" />
       <workItem from="1592224651717" duration="197000" />
+      <workItem from="1592241135053" duration="61000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39906000" />
+    <option name="totallyTimeSpent" value="39967000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1929" y="-9" width="1938" height="1098" extended-state="6" />
@@ -541,18 +533,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/auth.routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-728">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -574,7 +558,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="382">
           <caret line="16" column="118" lean-forward="false" selection-start-line="16" selection-start-column="118" selection-end-line="16" selection-end-column="118" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -603,7 +586,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
           <caret line="405" column="0" lean-forward="true" selection-start-line="405" selection-start-column="0" selection-end-line="405" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -611,7 +593,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="432" column="24" lean-forward="false" selection-start-line="432" selection-start-column="17" selection-end-line="432" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -619,7 +600,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="420" column="24" lean-forward="false" selection-start-line="420" selection-start-column="17" selection-end-line="420" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -627,6 +607,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="413" column="24" lean-forward="false" selection-start-line="413" selection-start-column="17" selection-end-line="413" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
           <folding />
         </state>
       </provider>

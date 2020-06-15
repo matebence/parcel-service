@@ -14,5 +14,7 @@ module.exports = app => {
 
     router.post("/search", invoices.search.authorize, invoices.search.checkBody, invoices.search.inDatabase);
 
+    router.post("/join/:columnName", invoices.join.authorize, invoices.join.checkBody, invoices.join.validate, invoices.join.inDatabase);
+
     app.use('/api/invoices', router);
 };

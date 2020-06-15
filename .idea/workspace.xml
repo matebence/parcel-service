@@ -3,7 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="dffca381-81f7-4fdc-9628-945a04bd3646" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Dockerfile" afterPath="$PROJECT_DIR$/Dockerfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/categories.controller.js" afterPath="$PROJECT_DIR$/app/controllers/categories.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/invoices.controllers.js" afterPath="$PROJECT_DIR$/app/controllers/invoices.controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/parcels.controller.js" afterPath="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/ratings.controller.js" afterPath="$PROJECT_DIR$/app/controllers/ratings.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/categories.routes.js" afterPath="$PROJECT_DIR$/app/routes/categories.routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/invoices.routes.js" afterPath="$PROJECT_DIR$/app/routes/invoices.routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/parcels.routes.js" afterPath="$PROJECT_DIR$/app/routes/parcels.routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/ratings.routes.js" afterPath="$PROJECT_DIR$/app/routes/ratings.routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/strings.js" afterPath="$PROJECT_DIR$/resources/strings.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,7 +25,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -28,21 +36,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>DATABASE_STRUCTURE</find>
-      <find>District</find>
-      <find>validate:</find>
-      <find>_DISTRICT_</find>
-      <find>ISTRICT_</find>
-      <find>district_</find>
-      <find>Distri</find>
-      <find>distric</find>
       <find>name</find>
       <find>Distr</find>
       <find>dist</find>
       <find>dis</find>
       <find>DISTRICT_</find>
       <find>distr</find>
-      <find>checkBody</find>
       <find>checkBody:</find>
       <find>VILLAGE_</find>
       <find>REGION_</find>
@@ -57,6 +56,16 @@
       <find>VIEW_PARCELS</find>
       <find>authorize:</find>
       <find>'ROLE_SYSTEM',</find>
+      <find>categories</find>
+      <find>checkBody</find>
+      <find>isInt</find>
+      <find>str</find>
+      <find>req.param</find>
+      <find>console</find>
+      <find>include: [database.parcels]</find>
+      <find>include</find>
+      <find>'ROLE_SYSTEM',</find>
+      <find>hasRole</find>
     </findStrings>
     <replaceStrings>
       <replace>CATEGORZ_</replace>
@@ -70,6 +79,9 @@
       <replace>PARCEL_</replace>
       <replace>_CATEGORY</replace>
       <replace>_CATEGORIES</replace>
+      <replace>parcels</replace>
+      <replace>ratings</replace>
+      <replace>invoices</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -94,23 +106,23 @@
         <option value="$PROJECT_DIR$/app/models/ratings.model.js" />
         <option value="$PROJECT_DIR$/app/models/parcels.model.js" />
         <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/app/routes/ratings.routes.js" />
-        <option value="$PROJECT_DIR$/app/routes/parcels.routes.js" />
-        <option value="$PROJECT_DIR$/app/routes/invoices.routes.js" />
-        <option value="$PROJECT_DIR$/app/routes/categories.routes.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/package-lock.json" />
         <option value="$PROJECT_DIR$/seeders/20200611090607-ratings.js" />
         <option value="$PROJECT_DIR$/seeders/20200611090559-invoices.js" />
         <option value="$PROJECT_DIR$/seeders/20200611090606-parcels.js" />
         <option value="$PROJECT_DIR$/app/models/index.js" />
-        <option value="$PROJECT_DIR$/resources/strings.js" />
         <option value="$PROJECT_DIR$/app/routes/auth.routes.js" />
-        <option value="$PROJECT_DIR$/app/controllers/ratings.controller.js" />
-        <option value="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
-        <option value="$PROJECT_DIR$/app/controllers/invoices.controllers.js" />
-        <option value="$PROJECT_DIR$/app/controllers/categories.controller.js" />
         <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/app/routes/categories.routes.js" />
+        <option value="$PROJECT_DIR$/app/routes/ratings.routes.js" />
+        <option value="$PROJECT_DIR$/app/routes/parcels.routes.js" />
+        <option value="$PROJECT_DIR$/app/routes/invoices.routes.js" />
+        <option value="$PROJECT_DIR$/resources/strings.js" />
+        <option value="$PROJECT_DIR$/app/controllers/categories.controller.js" />
+        <option value="$PROJECT_DIR$/app/controllers/invoices.controllers.js" />
+        <option value="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
+        <option value="$PROJECT_DIR$/app/controllers/ratings.controller.js" />
       </list>
     </option>
   </component>
@@ -151,6 +163,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -165,7 +178,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -178,7 +190,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="10.15.0" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="SearchEverywhereHistoryKey" value="auth&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/routes/auth.routes.js&#10;index.&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js&#10;index.js&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js" />
+    <property name="SearchEverywhereHistoryKey" value="string&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/resources/strings.js&#10;auth&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/routes/auth.routes.js&#10;index.&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js&#10;index.js&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -320,11 +332,13 @@
       <workItem from="1592147082506" duration="114000" />
       <workItem from="1592147622552" duration="150000" />
       <workItem from="1592157696186" duration="612000" />
+      <workItem from="1592215157060" duration="5302000" />
+      <workItem from="1592224651717" duration="197000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34407000" />
+    <option name="totallyTimeSpent" value="39906000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1929" y="-9" width="1938" height="1098" extended-state="6" />
@@ -332,12 +346,12 @@
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="2409" y="36" width="942" height="1035" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31048805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39919892" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997923" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -362,7 +376,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -451,13 +464,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/seeders/20200611090553-categories.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="32" column="2" lean-forward="true" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/seeders/20200611090558-parcels.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -493,20 +499,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/strings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="59" column="60" lean-forward="false" selection-start-line="59" selection-start-column="60" selection-end-line="59" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/ratings.routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="17" column="2" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="904">
@@ -514,31 +506,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/categories.routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/errors.routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="11" column="2" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/invoices.routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/parcels.routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -570,45 +541,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/auth.routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
+        <state relative-caret-position="-728">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/categories.controller.js">
+    <entry file="file://$PROJECT_DIR$/app/routes/invoices.routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="6" column="33" lean-forward="true" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+        <state relative-caret-position="321">
+          <caret line="16" column="121" lean-forward="false" selection-start-line="16" selection-start-column="121" selection-end-line="16" selection-end-column="121" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/invoices.controllers.js">
+    <entry file="file://$PROJECT_DIR$/app/routes/parcels.routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8201">
-          <caret line="345" column="41" lean-forward="false" selection-start-line="345" selection-start-column="41" selection-end-line="345" selection-end-column="41" />
+        <state relative-caret-position="321">
+          <caret line="16" column="118" lean-forward="false" selection-start-line="16" selection-start-column="118" selection-end-line="16" selection-end-column="118" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/parcels.controller.js">
+    <entry file="file://$PROJECT_DIR$/app/routes/ratings.routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8489">
-          <caret line="357" column="41" lean-forward="false" selection-start-line="357" selection-start-column="41" selection-end-line="357" selection-end-column="41" />
+        <state relative-caret-position="382">
+          <caret line="16" column="118" lean-forward="false" selection-start-line="16" selection-start-column="118" selection-end-line="16" selection-end-column="118" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seeders/20200611090553-categories.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="32" column="2" lean-forward="true" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/strings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="42" column="22" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/categories.routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/ratings.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7992">
-          <caret line="333" column="41" lean-forward="false" selection-start-line="333" selection-start-column="41" selection-end-line="333" selection-end-column="41" />
+        <state relative-caret-position="265">
+          <caret line="405" column="0" lean-forward="true" selection-start-line="405" selection-start-column="0" selection-end-line="405" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dockerfile">
+    <entry file="file://$PROJECT_DIR$/app/controllers/parcels.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+        <state relative-caret-position="297">
+          <caret line="432" column="24" lean-forward="false" selection-start-line="432" selection-start-column="17" selection-end-line="432" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/invoices.controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="420" column="24" lean-forward="false" selection-start-line="420" selection-start-column="17" selection-end-line="420" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/categories.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="413" column="24" lean-forward="false" selection-start-line="413" selection-start-column="17" selection-end-line="413" selection-end-column="24" />
           <folding />
         </state>
       </provider>

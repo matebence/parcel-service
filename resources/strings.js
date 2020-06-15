@@ -40,6 +40,7 @@ module.exports = {
     CATEGORY_ID_INT: `Nesprávný formát identifikacného čísla`,
     CATEGORY_PAGE_NUMBER_INT: `Nesprávný formát číslo strany`,
     CATEGORY_PAGE_SIZE_INT: `Nesprávný formát veľkosť strany`,
+    CATEGORY_COLUMN_NAME_ALPHA: `Nesprávný formát názov stľpca`,
 
     INVOICE_INVOICE_LENGHT: `Minimálna dlžka adresi faktúri je 3 a maximalná je 255`,
     INVOICE_INVOICE_URL: `Nesprávný formát adresi pre faktúru`,
@@ -47,6 +48,7 @@ module.exports = {
     INVOICE_ID_INT: `Nesprávný formát identifikacného čísla`,
     INVOICE_PAGE_NUMBER_INT: `Nesprávný formát číslo strany`,
     INVOICE_PAGE_SIZE_INT: `Nesprávný formát veľkosť strany`,
+    INVOICE_COLUMN_NAME_ALPHA: `Nesprávný formát názov stľpca`,
 
     PARCEL_SENDER_ID_INT: `Nesprávný formát identifikacného čísla odosielateľa`,
     PARCEL_RECEIVER_ID_INT: `Nesprávný formát identifikacného prijímateľa`,
@@ -60,6 +62,7 @@ module.exports = {
     PARCEL_ID_INT: `Nesprávný formát identifikacného čísla`,
     PARCEL_PAGE_NUMBER_INT: `Nesprávný formát číslo strany`,
     PARCEL_PAGE_SIZE_INT: `Nesprávný formát veľkosť strany`,
+    PARCEL_COLUMN_NAME_ALPHA: `Nesprávný formát názov stľpca`,
 
     RATING_DESCRIPTION_MATCHES: `Nesprávný formát popisu`,
     RATING_RATING_MATCHES: `Nesprávný formát ohodnotenia`,
@@ -67,5 +70,6 @@ module.exports = {
     RATING_PARCEL_ID_INT: `Nesprávný formát identifikacného čísla balíka`,
     RATING_ID_INT: `Nesprávný formát identifikacného čísla`,
     RATING_PAGE_NUMBER_INT: `Nesprávný formát číslo strany`,
-    RATING_PAGE_SIZE_INT: `Nesprávný formát veľkosť strany`
+    RATING_PAGE_SIZE_INT: `Nesprávný formát veľkosť strany`,
+    RATING_COLUMN_NAME_ALPHA: `Nesprávný formát názov stľpca`
 };

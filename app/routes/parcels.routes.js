@@ -14,5 +14,7 @@ module.exports = app => {
 
     router.post("/search", parcels.search.authorize, parcels.search.checkBody, parcels.search.inDatabase);
 
+    router.post("/join/:columnName", parcels.join.authorize, parcels.join.checkBody, parcels.join.validate, parcels.join.inDatabase);
+
     app.use('/api/parcels', router);
 };

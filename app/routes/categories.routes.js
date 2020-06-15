@@ -14,5 +14,7 @@ module.exports = app => {
 
     router.post("/search", categories.search.authorize, categories.search.checkBody, categories.search.inDatabase);
 
+    router.post("/join/:columnName", categories.join.authorize, categories.join.checkBody, categories.join.validate, categories.join.inDatabase);
+
     app.use('/api/categories', router);
 };

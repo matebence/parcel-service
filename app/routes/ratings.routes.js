@@ -14,5 +14,7 @@ module.exports = app => {
 
     router.post("/search", ratings.search.authorize, ratings.search.checkBody, ratings.search.inDatabase);
 
+    router.post("/join/:columnName", ratings.join.authorize, ratings.join.checkBody, ratings.join.validate, ratings.join.inDatabase);
+
     app.use('/api/ratings', router);
 };

@@ -330,7 +330,6 @@ exports.getAll = {
                 });
             }
         }).catch(err => {
-            console.log(err);
             return res.status(500).json({
                 timestamp: new Date().toISOString(),
                 message: strings.INVOICE_NOT_FOUND,
@@ -479,7 +478,6 @@ exports.join = {
                 });
             }
         }).catch(err => {
-            console.log(err);
             return res.status(500).json({
                 timestamp: new Date().toISOString(),
                 message: strings.CATEGORY_NOT_FOUND,

@@ -472,7 +472,6 @@ exports.join = {
                 });
             }
         }).catch(err => {
-            console.log(err);
             return res.status(500).json({
                 timestamp: new Date().toISOString(),
                 message: strings.CATEGORY_NOT_FOUND,

@@ -7,8 +7,9 @@ module.exports = {
     DATABASE_STRUCTURE_ERR: `Nepodarilo sa vytvoriť štruktúru databázy`,
     DATABASE_SEED: `Databáza bola úspešne naplnená údajmi`,
     DATABASE_SEED_ERR: `Databázu sa nepodarilo naplniť údajmi`,
-    EUREKA_ERR: `Eureka service registrácia bola úspešná`,
+    REDIS_DATABASE_CONNECTION_ERROR: `Nepodarilo sa pripojiť ku: `,
     AUTH_REQUIRED: `Ľutujeme, ale stránka nie je k dispozícií`,
+    PROXY_ERR: `Služba je nedostupná`,
     AUTH_ERR: `Prístup odmietnutý`,
 
     CREATE_CATEGORY_ERR: `Vytvorenie kategórie balíka sa nepodarilo, skúste znova`,

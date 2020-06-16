@@ -1,8 +1,10 @@
 const {validationResult, check} = require('express-validator/check');
+const crypto = require('crypto-js');
 
 const strings = require('../../resources/strings');
 const database = require("../models");
 
+const Accounts = require('../component/resilient.component');
 const Parcels = database.parcels;
 const Invoices = database.invoices;
 const Ratings = database.ratings;
@@ -35,9 +37,9 @@ exports.create = {
         next()
     },
     validate: [
-        check('senderId')
+        check('sender')
             .isInt({min: 1}).withMessage(strings.PARCEL_SENDER_ID_INT),
-        check('receiverId')
+        check('receiver')
             .isInt({min: 1}).withMessage(strings.PARCEL_RECEIVER_ID_INT),
         check('categoryId')
             .isInt({min: 1}).withMessage(strings.PARCEL_CATEGORY_ID_INT),
@@ -170,9 +172,9 @@ exports.update = {
     validate: [
         check('id')
             .isInt({min: 1}).withMessage(strings.PARCEL_ID_INT),
-        check('senderId')
+        check('sender')
             .isInt({min: 1}).withMessage(strings.PARCEL_SENDER_ID_INT),
-        check('receiverId')
+        check('receiver')
             .isInt({min: 1}).withMessage(strings.PARCEL_RECEIVER_ID_INT),
         check('categoryId')
             .isInt({min: 1}).withMessage(strings.PARCEL_CATEGORY_ID_INT),
@@ -266,9 +268,11 @@ exports.get = {
                 {include: [database.categories, database.invoices], transaction: t});
         }).then(data => {
             if (data) {
-                return res.status(200).json(data, [
+                req.parcels = data;
+                req.hateosLinks = [
                     {rel: "self", method: "GET", href: req.protocol + '://' + req.get('host') + req.originalUrl},
-                    {rel: "all-parcels", method: "GET", href: `${req.protocol}://${req.get('host')}/api/parcels/page/${DEFAULT_PAGE_NUMBER}/limit/${DEFAULT_PAGE_SIZE}`}]);
+                    {rel: "all-parcels", method: "GET", href: `${req.protocol}://${req.get('host')}/api/parcels/page/${DEFAULT_PAGE_NUMBER}/limit/${DEFAULT_PAGE_SIZE}`}];
+                next();
             } else {
                 return res.status(400).json({
                     timestamp: new Date().toISOString(),
@@ -278,13 +282,65 @@ exports.get = {
                 });
             }
         }).catch(err => {
-            console.log(err);
             return res.status(500).json({
                 timestamp: new Date().toISOString(),
                 message: strings.PARCEL_NOT_FOUND,
                 error: true,
                 nav: `${req.protocol}://${req.get('host')}`
             });
+        });
+    },
+    fetchDataFromService: (req, res, next) => {
+        const proxy = Accounts.resilient("ACCOUNT-SERVICE");
+        const accounts = [req.parcels.sender, req.parcels.receiver];
+
+        proxy.post('/accounts/join/accountId', {data: accounts}).then(response => {
+            if (response.status >= 300 && !'error' in response.data) return new Error(strings.PROXY_ERR);
+            response.data.forEach(e => {database.redis.setex(crypto.MD5(`accounts-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
+
+            const parcels = [req.parcels].map(e => {
+                const sender = response.data.find(x => x.accountId === e.sender);
+                const receiver = response.data.find(x => x.accountId === e.receiver);
+
+                return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+            }).pop();
+
+            return res.status(200).json(parcels, req.hateosLinks);
+        }).catch(err => {
+            req.cacheId = accounts;
+            next();
+        });
+    },
+    fetchDataFromCache: (req, res, next) => {
+        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`accounts-${e}`).toString()}), (err, data) => {
+            if (!data) {
+                return res.status(500).json({
+                    timestamp: new Date().toISOString(),
+                    message: strings.PARCEL_NOT_FOUND,
+                    error: true,
+                    nav: `${req.protocol}://${req.get('host')}`
+                });
+            } else{
+                try{
+                    data = JSON.stringify(data.map(e => {return JSON.parse(e)}));
+                    const parcels = [req.parcels].map(e => {
+                        const parsedData = JSON.parse(data);
+                        const sender = parsedData.find(x => x.accountId === e.sender);
+                        const receiver = parsedData.find(x => x.accountId === e.receiver);
+
+                        return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                    }).pop();
+
+                    return res.status(200).json(parcels, req.hateosLinks);
+                }catch(err){
+                    return res.status(500).json({
+                        timestamp: new Date().toISOString(),
+                        message: strings.PARCEL_NOT_FOUND,
+                        error: true,
+                        nav: `${req.protocol}://${req.get('host')}`
+                    });
+                }
+            }
         });
     }
 };
@@ -331,9 +387,11 @@ exports.getAll = {
             }, {transaction: t});
         }).then(data => {
             if (data.length > 0 || data !== undefined) {
-                return res.status(206).json({data}, [
+                req.parcels = data;
+                req.hateosLinks = [
                     {rel: "self", method: "GET", href: req.protocol + '://' + req.get('host') + req.originalUrl},
-                    {rel: "next-range", method: "GET", href: `${req.protocol}://${req.get('host')}/api/parcels/page/${1 + Number(req.params.pageNumber)}/limit/${req.params.pageSize}`}]);
+                    {rel: "next-range", method: "GET", href: `${req.protocol}://${req.get('host')}/api/parcels/page/${1 + Number(req.params.pageNumber)}/limit/${req.params.pageSize}`}];
+                next();
             } else {
                 return res.status(400).json({
                     timestamp: new Date().toISOString(),
@@ -349,6 +407,60 @@ exports.getAll = {
                 error: true,
                 nav: `${req.protocol}://${req.get('host')}`
             });
+        });
+    },
+    fetchDataFromService: (req, res, next) => {
+        const proxy = Accounts.resilient("ACCOUNT-SERVICE");
+        let accounts = req.parcels.filter(e => e.sender && e.receiver).map(x => [x.sender, x.receiver]);
+        accounts = [...new Set(accounts.reduce((acc, val) => [ ...acc, ...val ], []))];
+
+        proxy.post('/accounts/join/accountId', {data: accounts}).then(response => {
+            if (response.status >= 300 && !'error' in response.data) return new Error(strings.PROXY_ERR);
+            response.data.forEach(e => {database.redis.setex(crypto.MD5(`accounts-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
+
+            const parcels = req.parcels.map(e => {
+                const sender = response.data.find(x => x.accountId === e.sender);
+                const receiver = response.data.find(x => x.accountId === e.receiver);
+
+                return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+            });
+
+            return res.status(206).json({data: parcels}, req.hateosLinks);
+        }).catch(err => {
+            req.cacheId = accounts;
+            next();
+        });
+    },
+    fetchDataFromCache: (req, res, next) => {
+        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`accounts-${e}`).toString()}), (err, data) => {
+            if (!data) {
+                return res.status(500).json({
+                    timestamp: new Date().toISOString(),
+                    message: strings.PARCEL_NOT_FOUND,
+                    error: true,
+                    nav: `${req.protocol}://${req.get('host')}`
+                });
+            } else {
+                try{
+                    data = JSON.stringify(data.map(e => {return JSON.parse(e)}));
+                    const parcels = req.parcels.map(e => {
+                        const parsedData = JSON.parse(data);
+                        const sender = parsedData.find(x => x.accountId === e.sender);
+                        const receiver = parsedData.find(x => x.accountId === e.receiver);
+
+                        return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                    });
+
+                    return res.status(206).json({data: parcels}, req.hateosLinks);
+                } catch(err) {
+                    return res.status(500).json({
+                        timestamp: new Date().toISOString(),
+                        message: strings.PARCEL_NOT_FOUND,
+                        error: true,
+                        nav: `${req.protocol}://${req.get('host')}`
+                    });
+                }
+            }
         });
     }
 };
@@ -408,7 +520,9 @@ exports.search = {
             }, {transaction: t});
         }).then(data => {
             if (data.length > 0 || data !== undefined) {
-                return res.status(200).json({data}, hateosLinks);
+                req.parcels = data;
+                req.hateosLinks = hateosLinks;
+                next();
             } else {
                 return res.status(400).json({
                     timestamp: new Date().toISOString(),
@@ -424,6 +538,60 @@ exports.search = {
                 error: true,
                 nav: `${req.protocol}://${req.get('host')}`
             });
+        });
+    },
+    fetchDataFromService: (req, res, next) => {
+        const proxy = Accounts.resilient("ACCOUNT-SERVICE");
+        let accounts = req.parcels.filter(e => e.sender && e.receiver).map(x => [x.sender, x.receiver]);
+        accounts = [...new Set(accounts.reduce((acc, val) => [ ...acc, ...val ], []))];
+
+        proxy.post('/accounts/join/accountId', {data: accounts}).then(response => {
+            if (response.status >= 300 && !'error' in response.data) return new Error(strings.PROXY_ERR);
+            response.data.forEach(e => {database.redis.setex(crypto.MD5(`accounts-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
+
+            const parcels = req.parcels.map(e => {
+                const sender = response.data.find(x => x.accountId === e.sender);
+                const receiver = response.data.find(x => x.accountId === e.receiver);
+
+                return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+            });
+
+            return res.status(200).json({data: parcels}, req.hateosLinks);
+        }).catch(err => {
+            req.cacheId = accounts;
+            next();
+        });
+    },
+    fetchDataFromCache: (req, res, next) => {
+        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`accounts-${e}`).toString()}), (err, data) => {
+            if (!data) {
+                return res.status(500).json({
+                    timestamp: new Date().toISOString(),
+                    message: strings.PARCEL_NOT_FOUND,
+                    error: true,
+                    nav: `${req.protocol}://${req.get('host')}`
+                });
+            } else {
+                try{
+                    data = JSON.stringify(data.map(e => {return JSON.parse(e)}));
+                    const parcels = req.parcels.map(e => {
+                        const parsedData = JSON.parse(data);
+                        const sender = parsedData.find(x => x.accountId === e.sender);
+                        const receiver = parsedData.find(x => x.accountId === e.receiver);
+
+                        return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                    });
+
+                    return res.status(200).json({data: parcels}, req.hateosLinks);
+                } catch(err) {
+                    return res.status(500).json({
+                        timestamp: new Date().toISOString(),
+                        message: strings.PARCEL_NOT_FOUND,
+                        error: true,
+                        nav: `${req.protocol}://${req.get('host')}`
+                    });
+                }
+            }
         });
     }
 };
@@ -481,7 +649,8 @@ exports.join = {
             return Parcels.findAll({where: {[Op.or]: ids}, include: [database.categories, database.invoices]}, {transaction: t});
         }).then(data => {
             if (data.length > 0 || data !== undefined) {
-                return res.status(200).json(data);
+                req.parcels = data;
+                next();
             } else {
                 return res.status(400).json({
                     timestamp: new Date().toISOString(),
@@ -491,13 +660,66 @@ exports.join = {
                 });
             }
         }).catch(err => {
-            console.log(err);
             return res.status(500).json({
                 timestamp: new Date().toISOString(),
                 message: strings.CATEGORY_NOT_FOUND,
                 error: true,
                 nav: `${req.protocol}://${req.get('host')}`
             });
+        });
+    },
+    fetchDataFromService: (req, res, next) => {
+        const proxy = Accounts.resilient("ACCOUNT-SERVICE");
+        let accounts = req.parcels.filter(e => e.sender && e.receiver).map(x => [x.sender, x.receiver]);
+        accounts = [...new Set(accounts.reduce((acc, val) => [ ...acc, ...val ], []))];
+
+        proxy.post('/accounts/join/accountId', {data: accounts}).then(response => {
+            if (response.status >= 300 && !'error' in response.data) return new Error(strings.PROXY_ERR);
+            response.data.forEach(e => {database.redis.setex(crypto.MD5(`accounts-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
+
+            const parcels = req.parcels.map(e => {
+                const sender = response.data.find(x => x.accountId === e.sender);
+                const receiver = response.data.find(x => x.accountId === e.receiver);
+
+                return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+            });
+
+            return res.status(200).json(parcels, req.hateosLinks);
+        }).catch(err => {
+            req.cacheId = accounts;
+            next();
+        });
+    },
+    fetchDataFromCache: (req, res, next) => {
+        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`accounts-${e}`).toString()}), (err, data) => {
+            if (!data) {
+                return res.status(500).json({
+                    timestamp: new Date().toISOString(),
+                    message: strings.PARCEL_NOT_FOUND,
+                    error: true,
+                    nav: `${req.protocol}://${req.get('host')}`
+                });
+            } else {
+                try{
+                    data = JSON.stringify(data.map(e => {return JSON.parse(e)}));
+                    const parcels = req.parcels.map(e => {
+                        const parsedData = JSON.parse(data);
+                        const sender = parsedData.find(x => x.accountId === e.sender);
+                        const receiver = parsedData.find(x => x.accountId === e.receiver);
+
+                        return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                    });
+
+                    return res.status(200).json(parcels, req.hateosLinks);
+                } catch(err) {
+                    return res.status(500).json({
+                        timestamp: new Date().toISOString(),
+                        message: strings.PARCEL_NOT_FOUND,
+                        error: true,
+                        nav: `${req.protocol}://${req.get('host')}`
+                    });
+                }
+            }
         });
     }
 };

@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dffca381-81f7-4fdc-9628-945a04bd3646" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/component/eureka.component.js" afterPath="$PROJECT_DIR$/app/component/eureka.component.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/categories.controller.js" afterPath="$PROJECT_DIR$/app/controllers/categories.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/invoices.controllers.js" afterPath="$PROJECT_DIR$/app/controllers/invoices.controllers.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/parcels.controller.js" afterPath="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/ratings.controller.js" afterPath="$PROJECT_DIR$/app/controllers/ratings.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/index.js" afterPath="$PROJECT_DIR$/app/models/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/parcels.model.js" afterPath="$PROJECT_DIR$/app/models/parcels.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/parcels.routes.js" afterPath="$PROJECT_DIR$/app/routes/parcels.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/strings.js" afterPath="$PROJECT_DIR$/resources/strings.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seeders/20200611090558-parcels.js" afterPath="$PROJECT_DIR$/seeders/20200611090558-parcels.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -40,7 +30,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>CATEGORY_</find>
       <find>_SHIPMENT_STATUS</find>
       <find>_CATEGORY</find>
       <find>VIEW_PARCELS</find>
@@ -70,6 +59,7 @@
       <find>session</find>
       <find>shipment</find>
       <find>console.</find>
+      <find>.search</find>
     </findStrings>
     <replaceStrings>
       <replace>CATEGORZ_</replace>
@@ -121,16 +111,16 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/package-lock.json" />
         <option value="$PROJECT_DIR$/app/models/index.js" />
-        <option value="$PROJECT_DIR$/app/controllers/ratings.controller.js" />
-        <option value="$PROJECT_DIR$/app/controllers/invoices.controllers.js" />
-        <option value="$PROJECT_DIR$/app/controllers/categories.controller.js" />
         <option value="$PROJECT_DIR$/app/models/invoices.model.js" />
         <option value="$PROJECT_DIR$/app/models/parcels.model.js" />
         <option value="$PROJECT_DIR$/resources/templates/parcelNotification.ejs" />
         <option value="$PROJECT_DIR$/app/component/resilient.component.js" />
         <option value="$PROJECT_DIR$/app/routes/parcels.routes.js" />
         <option value="$PROJECT_DIR$/seeders/20200611090558-parcels.js" />
+        <option value="$PROJECT_DIR$/app/controllers/ratings.controller.js" />
         <option value="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
+        <option value="$PROJECT_DIR$/app/controllers/invoices.controllers.js" />
+        <option value="$PROJECT_DIR$/app/controllers/categories.controller.js" />
       </list>
     </option>
   </component>
@@ -376,12 +366,12 @@
       <workItem from="1592215157060" duration="5302000" />
       <workItem from="1592224651717" duration="197000" />
       <workItem from="1592241135053" duration="61000" />
-      <workItem from="1592303945012" duration="14612000" />
+      <workItem from="1592303945012" duration="16237000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54579000" />
+    <option name="totallyTimeSpent" value="56204000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1929" y="-9" width="1938" height="1098" extended-state="6" />
@@ -511,14 +501,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="768">
           <caret line="32" column="2" lean-forward="true" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seeders/20200611090558-parcels.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="20" column="2" lean-forward="true" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
           <folding />
         </state>
       </provider>
@@ -691,34 +673,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/ratings.controller.js">
+    <entry file="file://$PROJECT_DIR$/app/controllers/categories.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="256" column="0" lean-forward="false" selection-start-line="256" selection-start-column="0" selection-end-line="256" selection-end-column="0" />
+        <state relative-caret-position="265">
+          <caret line="361" column="37" lean-forward="false" selection-start-line="361" selection-start-column="37" selection-end-line="361" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/invoices.controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="332" column="0" lean-forward="false" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/categories.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="482" column="2" lean-forward="true" selection-start-line="482" selection-start-column="2" selection-end-line="482" selection-end-column="2" />
+        <state relative-caret-position="705">
+          <caret line="383" column="12" lean-forward="false" selection-start-line="383" selection-start-column="12" selection-end-line="383" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/parcels.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        <state relative-caret-position="489">
+          <caret line="508" column="12" lean-forward="false" selection-start-line="508" selection-start-column="12" selection-end-line="508" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/ratings.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="371" column="12" lean-forward="false" selection-start-line="371" selection-start-column="12" selection-end-line="371" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seeders/20200611090558-parcels.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="20" column="2" lean-forward="true" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
           <folding />
         </state>
       </provider>

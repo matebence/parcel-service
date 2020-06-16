@@ -376,7 +376,11 @@ exports.search = {
         }
         if (req.body.search) {
             for (let key in req.body.search) {
-                search.push({[key]: database.sequelize.where(database.sequelize.fn('lower', database.sequelize.col(key)), {[Op.like]: `%${req.body.search[key].toLowerCase()}%`})});
+                if (isNaN(req.body.search[key])){
+                    search.push({[key]: database.sequelize.where(database.sequelize.fn('lower', database.sequelize.col(key)), {[Op.like]: `%${req.body.search[key].toLowerCase()}%`})});
+                } else{
+                    search.push({[key]: Number(req.body.search[key])});
+                }
             }
         }
         Invoices.count({where: search}).then(count => {

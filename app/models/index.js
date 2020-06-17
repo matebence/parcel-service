@@ -35,17 +35,14 @@ module.exports = (app, config) => {
     database.redis = redisClient;
 
     database.categories = require("./categories.model")(sequelize, Sequelize);
-    database.invoices = require("./invoices.model")(sequelize, Sequelize);
     database.parcels = require("./parcels.model")(sequelize, Sequelize);
     database.ratings = require("./ratings.model")(sequelize, Sequelize);
 
-    database.parcels.hasOne(database.invoices, {foreignKey: 'parcelId', constraints: true});
     database.categories.hasOne(database.parcels, {foreignKey: 'categoryId', constraints: true});
     database.parcels.hasOne(database.ratings, {foreignKey: 'parcelId', constraints: true});
 
     database.ratings.belongsTo(database.parcels);
     database.parcels.belongsTo(database.categories);
-    database.invoices.belongsTo(database.parcels);
 
     module.exports = database;
 };

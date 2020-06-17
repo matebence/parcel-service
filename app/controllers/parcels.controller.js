@@ -4,9 +4,8 @@ const crypto = require('crypto-js');
 const strings = require('../../resources/strings');
 const database = require("../models");
 
-const Accounts = require('../component/resilient.component');
+const Users = require('../component/resilient.component');
 const Parcels = database.parcels;
-const Invoices = database.invoices;
 const Ratings = database.ratings;
 const Op = database.Sequelize.Op;
 
@@ -121,8 +120,7 @@ exports.delete = {
         return database.sequelize.transaction((t) => {
             return Promise.all([
                 Parcels.destroy({where: {id: req.params.id}}, {transaction: t}),
-                Ratings.destroy({where: {parcelId: req.params.id}}, {transaction: t}),
-                Invoices.destroy({where: {parcelId: req.params.id}}, {transaction: t})
+                Ratings.destroy({where: {parcelId: req.params.id}}, {transaction: t})
             ]);
         }).then(num => {
             if (num.every(number => number > 0)) {
@@ -265,7 +263,7 @@ exports.get = {
     inDatabase: (req, res, next) => {
         return database.sequelize.transaction((t) => {
             return Parcels.findByPk(req.params.id,
-                {include: [database.categories, database.invoices], transaction: t});
+                {include: [database.categories], transaction: t});
         }).then(data => {
             if (data) {
                 req.parcels = data;
@@ -291,28 +289,28 @@ exports.get = {
         });
     },
     fetchDataFromService: (req, res, next) => {
-        const proxy = Accounts.resilient("ACCOUNT-SERVICE");
-        const accounts = [req.parcels.sender, req.parcels.receiver];
+        const proxy = Users.resilient("USER-SERVICE");
+        const users = [req.parcels.sender, req.parcels.receiver];
 
-        proxy.post('/accounts/join/accountId', {data: accounts}).then(response => {
+        proxy.post('/users/join/accountId', {data: users}).then(response => {
             if (response.status >= 300 && !'error' in response.data) return new Error(strings.PROXY_ERR);
-            response.data.forEach(e => {database.redis.setex(crypto.MD5(`accounts-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
+            response.data.forEach(e => {database.redis.setex(crypto.MD5(`users-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
 
             const parcels = [req.parcels].map(e => {
                 const sender = response.data.find(x => x.accountId === e.sender);
                 const receiver = response.data.find(x => x.accountId === e.receiver);
 
-                return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
             }).pop();
 
             return res.status(200).json(parcels, req.hateosLinks);
         }).catch(err => {
-            req.cacheId = accounts;
+            req.cacheId = users;
             next();
         });
     },
     fetchDataFromCache: (req, res, next) => {
-        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`accounts-${e}`).toString()}), (err, data) => {
+        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`users-${e}`).toString()}), (err, data) => {
             if (!data) {
                 return res.status(500).json({
                     timestamp: new Date().toISOString(),
@@ -328,7 +326,7 @@ exports.get = {
                         const sender = parsedData.find(x => x.accountId === e.sender);
                         const receiver = parsedData.find(x => x.accountId === e.receiver);
 
-                        return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
                     }).pop();
 
                     return res.status(200).json(parcels, req.hateosLinks);
@@ -383,7 +381,7 @@ exports.getAll = {
                 offset: (Number(req.params.pageNumber) - 1) * Number(req.params.pageSize),
                 limit: Number(req.params.pageSize),
                 order: [['createdAt', 'ASC']],
-                include: [database.categories, database.invoices]
+                include: [database.categories]
             }, {transaction: t});
         }).then(data => {
             if (data.length > 0 || data !== undefined) {
@@ -410,29 +408,29 @@ exports.getAll = {
         });
     },
     fetchDataFromService: (req, res, next) => {
-        const proxy = Accounts.resilient("ACCOUNT-SERVICE");
-        let accounts = req.parcels.filter(e => e.sender && e.receiver).map(x => [x.sender, x.receiver]);
-        accounts = [...new Set(accounts.reduce((acc, val) => [ ...acc, ...val ], []))];
+        const proxy = Users.resilient("USER-SERVICE");
+        let users = req.parcels.filter(e => e.sender && e.receiver).map(x => [x.sender, x.receiver]);
+        users = [...new Set(users.reduce((acc, val) => [ ...acc, ...val ], []))];
 
-        proxy.post('/accounts/join/accountId', {data: accounts}).then(response => {
+        proxy.post('/users/join/accountId', {data: users}).then(response => {
             if (response.status >= 300 && !'error' in response.data) return new Error(strings.PROXY_ERR);
-            response.data.forEach(e => {database.redis.setex(crypto.MD5(`accounts-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
+            response.data.forEach(e => {database.redis.setex(crypto.MD5(`users-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
 
             const parcels = req.parcels.map(e => {
                 const sender = response.data.find(x => x.accountId === e.sender);
                 const receiver = response.data.find(x => x.accountId === e.receiver);
 
-                return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
             });
 
             return res.status(206).json({data: parcels}, req.hateosLinks);
         }).catch(err => {
-            req.cacheId = accounts;
+            req.cacheId = users;
             next();
         });
     },
     fetchDataFromCache: (req, res, next) => {
-        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`accounts-${e}`).toString()}), (err, data) => {
+        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`users-${e}`).toString()}), (err, data) => {
             if (!data) {
                 return res.status(500).json({
                     timestamp: new Date().toISOString(),
@@ -448,7 +446,7 @@ exports.getAll = {
                         const sender = parsedData.find(x => x.accountId === e.sender);
                         const receiver = parsedData.find(x => x.accountId === e.receiver);
 
-                        return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
                     });
 
                     return res.status(206).json({data: parcels}, req.hateosLinks);
@@ -520,7 +518,7 @@ exports.search = {
                 limit: Number(pagination.pageSize ? pagination.pageSize : DEFAULT_PAGE_SIZE),
                 order: order,
                 where: search,
-                include: [database.categories, database.invoices]
+                include: [database.categories]
             }, {transaction: t});
         }).then(data => {
             if (data.length > 0 || data !== undefined) {
@@ -545,29 +543,29 @@ exports.search = {
         });
     },
     fetchDataFromService: (req, res, next) => {
-        const proxy = Accounts.resilient("ACCOUNT-SERVICE");
-        let accounts = req.parcels.filter(e => e.sender && e.receiver).map(x => [x.sender, x.receiver]);
-        accounts = [...new Set(accounts.reduce((acc, val) => [ ...acc, ...val ], []))];
+        const proxy = Users.resilient("USER-SERVICE");
+        let users = req.parcels.filter(e => e.sender && e.receiver).map(x => [x.sender, x.receiver]);
+        users = [...new Set(users.reduce((acc, val) => [ ...acc, ...val ], []))];
 
-        proxy.post('/accounts/join/accountId', {data: accounts}).then(response => {
+        proxy.post('/users/join/accountId', {data: users}).then(response => {
             if (response.status >= 300 && !'error' in response.data) return new Error(strings.PROXY_ERR);
-            response.data.forEach(e => {database.redis.setex(crypto.MD5(`accounts-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
+            response.data.forEach(e => {database.redis.setex(crypto.MD5(`users-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
 
             const parcels = req.parcels.map(e => {
                 const sender = response.data.find(x => x.accountId === e.sender);
                 const receiver = response.data.find(x => x.accountId === e.receiver);
 
-                return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
             });
 
             return res.status(200).json({data: parcels}, req.hateosLinks);
         }).catch(err => {
-            req.cacheId = accounts;
+            req.cacheId = users;
             next();
         });
     },
     fetchDataFromCache: (req, res, next) => {
-        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`accounts-${e}`).toString()}), (err, data) => {
+        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`users-${e}`).toString()}), (err, data) => {
             if (!data) {
                 return res.status(500).json({
                     timestamp: new Date().toISOString(),
@@ -583,7 +581,7 @@ exports.search = {
                         const sender = parsedData.find(x => x.accountId === e.sender);
                         const receiver = parsedData.find(x => x.accountId === e.receiver);
 
-                        return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
                     });
 
                     return res.status(200).json({data: parcels}, req.hateosLinks);
@@ -650,7 +648,7 @@ exports.join = {
         }
 
         return database.sequelize.transaction((t) => {
-            return Parcels.findAll({where: {[Op.or]: ids}, include: [database.categories, database.invoices]}, {transaction: t});
+            return Parcels.findAll({where: {[Op.or]: ids}, include: [database.categories]}, {transaction: t});
         }).then(data => {
             if (data.length > 0 || data !== undefined) {
                 req.parcels = data;
@@ -673,29 +671,29 @@ exports.join = {
         });
     },
     fetchDataFromService: (req, res, next) => {
-        const proxy = Accounts.resilient("ACCOUNT-SERVICE");
-        let accounts = req.parcels.filter(e => e.sender && e.receiver).map(x => [x.sender, x.receiver]);
-        accounts = [...new Set(accounts.reduce((acc, val) => [ ...acc, ...val ], []))];
+        const proxy = Users.resilient("USER-SERVICE");
+        let users = req.parcels.filter(e => e.sender && e.receiver).map(x => [x.sender, x.receiver]);
+        users = [...new Set(users.reduce((acc, val) => [ ...acc, ...val ], []))];
 
-        proxy.post('/accounts/join/accountId', {data: accounts}).then(response => {
+        proxy.post('/users/join/accountId', {data: users}).then(response => {
             if (response.status >= 300 && !'error' in response.data) return new Error(strings.PROXY_ERR);
-            response.data.forEach(e => {database.redis.setex(crypto.MD5(`accounts-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
+            response.data.forEach(e => {database.redis.setex(crypto.MD5(`users-${e.accountId}`).toString(), 3600, JSON.stringify(e))});
 
             const parcels = req.parcels.map(e => {
                 const sender = response.data.find(x => x.accountId === e.sender);
                 const receiver = response.data.find(x => x.accountId === e.receiver);
 
-                return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
             });
 
             return res.status(200).json(parcels, req.hateosLinks);
         }).catch(err => {
-            req.cacheId = accounts;
+            req.cacheId = users;
             next();
         });
     },
     fetchDataFromCache: (req, res, next) => {
-        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`accounts-${e}`).toString()}), (err, data) => {
+        database.redis.mget(req.cacheId.map(e => {return crypto.MD5(`users-${e}`).toString()}), (err, data) => {
             if (!data) {
                 return res.status(500).json({
                     timestamp: new Date().toISOString(),
@@ -711,7 +709,7 @@ exports.join = {
                         const sender = parsedData.find(x => x.accountId === e.sender);
                         const receiver = parsedData.find(x => x.accountId === e.receiver);
 
-                        return {...e.dataValues, sender: {senderId: e.sender, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, userName: receiver.userName, email: receiver.email}};
+                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
                     });
 
                     return res.status(200).json(parcels, req.hateosLinks);

@@ -17,13 +17,7 @@ module.exports = {
     DELETE_CATEGORY_ERR: `Odstránenie kategórie balíka sa nepodarilo, skúste znova`,
     GET_CATEGORY_ERR: `Ľutujeme ale kategória balíka s identifikačním číslom neexistuje`,
     CATEGORY_NOT_FOUND: `Ľutujeme ale nenašiel sa žiadná kategória balíka`,
-
-    CREATE_INVOICE_ERR: `Vytvorenie faktúry sa nepodarilo, skúste znova`,
-    UPDATE_INVOICE_ERR: `Aktualizácia faktúry sa nepodarilo, skúste znova`,
-    DELETE_INVOICE_ERR: `Odstránenie faktúry sa nepodarilo, skúste znova`,
-    GET_INVOICE_ERR: `Ľutujeme ale faktúra s identifikačním číslom neexistuje`,
-    INVOICE_NOT_FOUND: `Ľutujeme ale nenašla sa žiadna fatúra`,
-
+    
     CREATE_PARCEL_ERR: `Vytvorenie balíka sa nepodarilo, skúste znova`,
     UPDATE_PARCEL_ERR: `Aktualizácia balíka sa nepodarilo, skúste znova`,
     DELETE_PARCEL_ERR: `Odstránenie balíka sa nepodarilo, skúste znova`,
@@ -42,14 +36,6 @@ module.exports = {
     CATEGORY_PAGE_NUMBER_INT: `Nesprávný formát číslo strany`,
     CATEGORY_PAGE_SIZE_INT: `Nesprávný formát veľkosť strany`,
     CATEGORY_COLUMN_NAME_ALPHA: `Nesprávný formát názov stľpca`,
-
-    INVOICE_INVOICE_LENGHT: `Minimálna dlžka adresi faktúri je 3 a maximalná je 255`,
-    INVOICE_INVOICE_URL: `Nesprávný formát adresi pre faktúru`,
-    INVOICE_PARCEL_ID_INT: `Nesprávný formát identifikacného čísla balíka`,
-    INVOICE_ID_INT: `Nesprávný formát identifikacného čísla`,
-    INVOICE_PAGE_NUMBER_INT: `Nesprávný formát číslo strany`,
-    INVOICE_PAGE_SIZE_INT: `Nesprávný formát veľkosť strany`,
-    INVOICE_COLUMN_NAME_ALPHA: `Nesprávný formát názov stľpca`,
 
     PARCEL_SENDER_ID_INT: `Nesprávný formát identifikacného čísla odosielateľa`,
     PARCEL_RECEIVER_ID_INT: `Nesprávný formát identifikacného prijímateľa`,

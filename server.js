@@ -31,7 +31,6 @@ client.load({
         require("./app/models")(app, config);
         require("./app/routes/auth.routes")(app, config);
         require("./app/routes/categories.routes")(app);
-        require("./app/routes/invoices.routes")(app);
         require("./app/routes/parcels.routes")(app);
         require("./app/routes/ratings.routes")(app);
         require("./app/routes/errors.routes")(app);

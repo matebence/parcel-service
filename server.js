@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const helmet = require('helmet');
 const cors = require("cors");
+const path = require('path');
 
 const app = express();
 
@@ -21,6 +22,7 @@ client.load({
     profiles: node.profiles.active,
     auth: {user: node.cloud.config.username, pass: node.cloud.config.password}
 }).then(config => {
+    global.appRoot = path.resolve(__dirname);
     config.bootstrap = node;
 
     require("./app/component/nodemailer.component")(app, config);

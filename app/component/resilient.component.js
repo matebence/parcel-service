@@ -23,6 +23,9 @@ module.exports = (app, config, callback) => {
             if (!err && res.socket._httpMessage.path.toString().includes("users") && '_embedded' in res.data) {
                 res.data = res.data._embedded.usersList
             }
+            if (!err && res.socket._httpMessage.path.toString().includes("accounts") && '_embedded' in res.data) {
+                res.data = res.data._embedded.accountsList
+            }
         });
         callback()
     });

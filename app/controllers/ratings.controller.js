@@ -40,7 +40,7 @@ exports.create = {
         check('image')
             .isBase64().withMessage(strings.RATING_IMAGE_BASE),
         check('parcelId')
-            .isBase64().withMessage(strings.RATING_PARCEL_ID_INT),
+            .isInt({min: 1}).withMessage(strings.RATING_PARCEL_ID_INT),
 
         (req, res, next) => {
             const errors = validationResult(req);
@@ -58,7 +58,7 @@ exports.create = {
     ],
     inDatabase: (req, res, next) => {
         return database.sequelize.transaction((t) => {
-            return Ratings.create(req.body, {transaction: t});
+            return Ratings.create({...req.body, image: `data:image/jpeg;base64,${req.body.image}`}, {transaction: t});
         }).then(data => {
             return res.status(201).json(data, [
                 {rel: "rating", method: "GET", href: `${req.protocol}://${req.get('host')}/api/ratings/${data.id}`}]);
@@ -163,7 +163,7 @@ exports.update = {
         check('image')
             .isBase64().withMessage(strings.RATING_IMAGE_BASE),
         check('parcelId')
-            .isBase64().withMessage(strings.RATING_PARCEL_ID_INT),
+            .isInt({min: 1}).withMessage(strings.RATING_PARCEL_ID_INT),
 
         (req, res, next) => {
             const errors = validationResult(req);
@@ -181,11 +181,11 @@ exports.update = {
     ],
     inDatabase: (req, res, next) => {
         return database.sequelize.transaction((t) => {
-            return Ratings.update(req.body, {
+            return Ratings.update({...req.body, image: `data:image/jpeg;base64,${req.body.image}`}, {
                 where: {id: req.params.id}
             }, {transaction: t});
         }).then(num => {
-            if (num === 1) {
+            if (num.pop() === 1) {
                 return res.status(200).json({});
             } else {
                 return res.status(400).json({

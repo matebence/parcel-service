@@ -31,7 +31,7 @@ module.exports = {
     RATING_NOT_FOUND: `Ľutujeme ale nenašiel sa žiadne ohodnotenie`,
 
     CATEGORY_NAME_LENGHT: `Minimálna dlžka názov kategórie je 3 a maximalná je 64`,
-    CATEGORY_NAME_ALPHA: `Nesprávný formát názov kategórie`,
+    CATEGORY_NAME_MATCHES: `Nesprávný formát názov kategórie`,
     CATEGORY_ID_INT: `Nesprávný formát identifikacného čísla`,
     CATEGORY_PAGE_NUMBER_INT: `Nesprávný formát číslo strany`,
     CATEGORY_PAGE_SIZE_INT: `Nesprávný formát veľkosť strany`,

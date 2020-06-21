@@ -35,7 +35,7 @@ exports.create = {
     validate: [
         check('name')
             .isLength({min: 3, max: 64}).withMessage(strings.CATEGORY_NAME_LENGHT)
-            .isAlpha(['sk-SK']).withMessage(strings.CATEGORY_NAME_ALPHA),
+            .matches(/^[\D ]+$/).withMessage(strings.CATEGORY_NAME_MATCHES),
 
         (req, res, next) => {
             const errors = validationResult(req);
@@ -162,7 +162,7 @@ exports.update = {
             .isInt({min: 1}).withMessage(strings.CATEGORY_ID_INT),
         check('name')
             .isLength({min: 3, max: 64}).withMessage(strings.CATEGORY_NAME_LENGHT)
-            .isAlpha(['sk-SK']).withMessage(strings.CATEGORY_NAME_ALPHA),
+            .matches(/^[\D ]+$/).withMessage(strings.CATEGORY_NAME_MATCHES),
 
         (req, res, next) => {
             const errors = validationResult(req);
@@ -184,7 +184,7 @@ exports.update = {
                 where: {id: req.params.id}
             }, {transaction: t});
         }).then(num => {
-            if (num === 1) {
+            if (num.pop() === 1) {
                 return res.status(200).json({});
             } else {
                 return res.status(400).json({

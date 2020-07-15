@@ -46,7 +46,7 @@ module.exports = (sequelize, Sequelize) => {
         hooks: {
             afterCreate: (parcel) => {
                 const proxy = Accounts.resilient("ACCOUNT-SERVICE");
-                proxy.post('/accounts/join/accountId', {data: [parcel.dataValues.sender]}).then(response => {
+                proxy.post('/accounts/join/accountId', {data: {ids: [parcel.dataValues.sender]}}).then(response => {
                     if (response.status < 300) mailer.sendHTMLMaile("parcelNotification.ejs", {}, {to: response.data.pop().email, subject: 'Nový balík'});
                 });
             }

@@ -46,8 +46,13 @@ module.exports = (sequelize, Sequelize) => {
         hooks: {
             afterCreate: (parcel) => {
                 const proxy = Accounts.resilient("ACCOUNT-SERVICE");
-                proxy.post('/accounts/join/accountId', {data: {ids: [parcel.dataValues.sender]}}).then(response => {
-                    if (response.status < 300) mailer.sendHTMLMaile("parcelNotification.ejs", {}, {to: response.data.pop().email, subject: 'Nový balík'});
+                proxy.post('/accounts/join/accountId', {data: {ids: [parcel.dataValues.sender, parcel.dataValues.receiver]}}).then(response => {
+                    if (response.status < 300) {
+                        response.data.forEach(e => {
+                            if (e.accountId === parcel.dataValues.sender) mailer.sendHTMLMaile("parcelNotification.ejs", {title: "Vaša požiadavka bola spracovaná", text: "Vami zvolený kuriér, čoskoro príde aby vyzdvihol balík"}, {to: e.email, subject: 'Nový balík'});
+                            if (e.accountId === parcel.dataValues.receiver) mailer.sendHTMLMaile("parcelNotification.ejs", {title: "Bola Vám pridelená zásielka", text: "Čoskoro bude Vám doručený balík"}, {to: e.email, subject: 'Nová zásielka'});
+                        });
+                    }
                 });
             }
         }

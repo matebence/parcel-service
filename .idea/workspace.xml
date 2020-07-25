@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dffca381-81f7-4fdc-9628-945a04bd3646" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/parcels.model.js" afterPath="$PROJECT_DIR$/app/models/parcels.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/templates/parcelNotification.ejs" afterPath="$PROJECT_DIR$/resources/templates/parcelNotification.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/parcels.controller.js" afterPath="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,8 +28,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>req.shipments</find>
-      <find>sess</find>
       <find>session</find>
       <find>shipment</find>
       <find>console.</find>
@@ -59,6 +56,8 @@
       <find>res</find>
       <find>resilient</find>
       <find>/users/join/accountId</find>
+      <find>.get</find>
+      <find>exports.get</find>
     </findStrings>
     <replaceStrings>
       <replace>CATEGORZ_</replace>
@@ -115,7 +114,6 @@
         <option value="$PROJECT_DIR$/app/models/index.js" />
         <option value="$PROJECT_DIR$/resources/strings.js" />
         <option value="$PROJECT_DIR$/app/controllers/categories.controller.js" />
-        <option value="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
         <option value="$PROJECT_DIR$/seeders/20200611090607-ratings.js" />
         <option value="$PROJECT_DIR$/app/component/nodemailer.component.js" />
         <option value="$PROJECT_DIR$/app/controllers/ratings.controller.js" />
@@ -125,6 +123,7 @@
         <option value="$PROJECT_DIR$/resources/templates/parcelNotification.ejs" />
         <option value="$PROJECT_DIR$/app/models/parcels.model.js" />
         <option value="$PROJECT_DIR$/app/component/resilient.component.js" />
+        <option value="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
       </list>
     </option>
   </component>
@@ -164,7 +163,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -244,6 +242,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -256,7 +255,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="10.15.0" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="SearchEverywhereHistoryKey" value="parcels&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/controllers/parcels.controller.js&#10;STRING&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/resources/strings.js&#10;server&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/server.js&#10;string&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/resources/strings.js&#10;routes&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/routes/parcels.routes.js&#10;auth&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/routes/auth.routes.js&#10;index.&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js&#10;index.js&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js" />
+    <property name="SearchEverywhereHistoryKey" value="parcel.con&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/controllers/parcels.controller.js&#10;parcels&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/controllers/parcels.controller.js&#10;STRING&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/resources/strings.js&#10;server&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/server.js&#10;string&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/resources/strings.js&#10;routes&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/routes/parcels.routes.js&#10;auth&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/routes/auth.routes.js&#10;index.&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js&#10;index.js&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -409,11 +408,12 @@
       <workItem from="1594647920530" duration="63000" />
       <workItem from="1594813932197" duration="785000" />
       <workItem from="1594888608153" duration="2145000" />
+      <workItem from="1595685290719" duration="565000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70578000" />
+    <option name="totallyTimeSpent" value="71143000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1929" y="-9" width="1938" height="1098" extended-state="6" />
@@ -734,13 +734,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/parcels.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/ratings.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3312">
@@ -752,7 +745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -760,9 +752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="789">
           <caret line="59" column="2" lean-forward="true" selection-start-line="59" selection-start-column="2" selection-end-line="59" selection-end-column="2" />
-          <folding>
-            <marker date="1594891954798" expanded="true" signature="1433:1455" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -770,17 +759,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="563">
           <caret line="290" column="29" lean-forward="true" selection-start-line="290" selection-start-column="29" selection-end-line="290" selection-end-column="29" />
-          <folding>
-            <element signature="n#style#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#7178#7184#0#HTML" expanded="true" />
-            <element signature="e#7226#7232#0#HTML" expanded="true" />
-            <element signature="e#7256#7262#0#HTML" expanded="true" />
-            <element signature="e#7280#7286#0#HTML" expanded="true" />
-            <element signature="e#7304#7310#0#HTML" expanded="true" />
-            <element signature="e#7346#7352#0#HTML" expanded="true" />
-            <element signature="e#7352#7358#0#HTML" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/parcels.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

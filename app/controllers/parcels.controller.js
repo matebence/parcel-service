@@ -300,7 +300,7 @@ exports.get = {
                 const sender = response.data.find(x => x.accountId === e.sender);
                 const receiver = response.data.find(x => x.accountId === e.receiver);
 
-                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
+                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, balance: sender.balance, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, balance: receiver.balance, places: receiver.places, userName: receiver.userName, email: receiver.email}};
             }).pop();
 
             return res.status(200).json(parcels, req.hateosLinks);
@@ -326,7 +326,7 @@ exports.get = {
                         const sender = parsedData.find(x => x.accountId === e.sender);
                         const receiver = parsedData.find(x => x.accountId === e.receiver);
 
-                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
+                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, balance: sender.balance, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, balance: receiver.balance, places: receiver.places, userName: receiver.userName, email: receiver.email}};
                     }).pop();
 
                     return res.status(200).json(parcels, req.hateosLinks);
@@ -420,7 +420,7 @@ exports.getAll = {
                 const sender = response.data.find(x => x.accountId === e.sender);
                 const receiver = response.data.find(x => x.accountId === e.receiver);
 
-                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
+                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, balance: sender.balance, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, balance: receiver.balance, places: receiver.places, userName: receiver.userName, email: receiver.email}};
             });
 
             return res.status(206).json({data: parcels}, req.hateosLinks);
@@ -446,7 +446,7 @@ exports.getAll = {
                         const sender = parsedData.find(x => x.accountId === e.sender);
                         const receiver = parsedData.find(x => x.accountId === e.receiver);
 
-                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
+                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, balance: sender.balance, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, balance: receiver.balance, places: receiver.places, userName: receiver.userName, email: receiver.email}};
                     });
 
                     return res.status(206).json({data: parcels}, req.hateosLinks);
@@ -555,7 +555,7 @@ exports.search = {
                 const sender = response.data.find(x => x.accountId === e.sender);
                 const receiver = response.data.find(x => x.accountId === e.receiver);
 
-                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
+                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, balance: sender.balance, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, balance: receiver.balance, places: receiver.places, userName: receiver.userName, email: receiver.email}};
             });
 
             return res.status(200).json({data: parcels}, req.hateosLinks);
@@ -581,7 +581,7 @@ exports.search = {
                         const sender = parsedData.find(x => x.accountId === e.sender);
                         const receiver = parsedData.find(x => x.accountId === e.receiver);
 
-                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
+                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, balance: sender.balance, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, balance: receiver.balance, places: receiver.places, userName: receiver.userName, email: receiver.email}};
                     });
 
                     return res.status(200).json({data: parcels}, req.hateosLinks);
@@ -683,7 +683,7 @@ exports.join = {
                 const sender = response.data.find(x => x.accountId === e.sender);
                 const receiver = response.data.find(x => x.accountId === e.receiver);
 
-                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
+                return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, balance: sender.balance, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, balance: receiver.balance, places: receiver.places, userName: receiver.userName, email: receiver.email}};
             });
 
             return res.status(200).json(parcels, req.hateosLinks);
@@ -709,7 +709,7 @@ exports.join = {
                         const sender = parsedData.find(x => x.accountId === e.sender);
                         const receiver = parsedData.find(x => x.accountId === e.receiver);
 
-                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, places: receiver.places, userName: receiver.userName, email: receiver.email}};
+                        return {...e.dataValues, sender: {senderId: e.sender, name:`${sender.firstName} ${sender.lastName}`, tel: sender.tel, balance: sender.balance, places: sender.places, userName: sender.userName, email: sender.email}, receiver: {receiverId: e.receiver, name:`${receiver.firstName} ${receiver.lastName}`, tel: receiver.tel, balance: receiver.balance, places: receiver.places, userName: receiver.userName, email: receiver.email}};
                     });
 
                     return res.status(200).json(parcels, req.hateosLinks);

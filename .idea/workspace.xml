@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dffca381-81f7-4fdc-9628-945a04bd3646" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/parcels.controller.js" afterPath="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/component/resilient.component.js" afterPath="$PROJECT_DIR$/app/component/resilient.component.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -122,8 +122,8 @@
         <option value="$PROJECT_DIR$/package-lock.json" />
         <option value="$PROJECT_DIR$/resources/templates/parcelNotification.ejs" />
         <option value="$PROJECT_DIR$/app/models/parcels.model.js" />
-        <option value="$PROJECT_DIR$/app/component/resilient.component.js" />
         <option value="$PROJECT_DIR$/app/controllers/parcels.controller.js" />
+        <option value="$PROJECT_DIR$/app/component/resilient.component.js" />
       </list>
     </option>
   </component>
@@ -163,7 +163,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -243,6 +242,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -255,7 +255,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="10.15.0" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="SearchEverywhereHistoryKey" value="parcel.con&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/controllers/parcels.controller.js&#10;parcels&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/controllers/parcels.controller.js&#10;STRING&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/resources/strings.js&#10;server&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/server.js&#10;string&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/resources/strings.js&#10;routes&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/routes/parcels.routes.js&#10;auth&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/routes/auth.routes.js&#10;index.&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js&#10;index.js&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js" />
+    <property name="SearchEverywhereHistoryKey" value="res&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/component/resilient.component.js&#10;parcel.con&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/controllers/parcels.controller.js&#10;parcels&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/controllers/parcels.controller.js&#10;STRING&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/resources/strings.js&#10;server&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/server.js&#10;string&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/resources/strings.js&#10;routes&#9;FILE&#9;file://D:/Projects/app-blesk/parcel-service/app/routes/parcels.routes.js&#10;auth&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/routes/auth.routes.js&#10;index.&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js&#10;index.js&#9;FILE&#9;file://D:/Projects/app-blesk/parcels-service/app/models/index.js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -409,11 +409,12 @@
       <workItem from="1594813932197" duration="785000" />
       <workItem from="1594888608153" duration="2145000" />
       <workItem from="1595685290719" duration="565000" />
+      <workItem from="1596105788388" duration="106000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71143000" />
+    <option name="totallyTimeSpent" value="71249000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1929" y="-9" width="1938" height="1098" extended-state="6" />
@@ -741,13 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/component/resilient.component.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/parcels.model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="789">
@@ -766,6 +760,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/component/resilient.component.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="789">
+          <caret line="33" column="2" lean-forward="true" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
           <folding />
         </state>
       </provider>

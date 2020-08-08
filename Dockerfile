@@ -4,4 +4,4 @@ COPY package*.json ./
 RUN npm install -g sequelize-cli
 RUN npm install
 COPY . .
-CMD ["./wait-for-it.sh" , "messaging-service:7400" , "--strict" , "--timeout=235" , "--" , "node", "server.js"]
+CMD ["./wait-for-it.sh" , "messaging-service:7400" , "--strict" , "--timeout=300" , "--" , "node", "server.js"]

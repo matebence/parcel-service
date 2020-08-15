@@ -38,7 +38,7 @@ exports.create = {
         check('rating')
             .matches(/^[1-5]$/).withMessage(strings.RATING_RATING_MATCHES),
         check('image')
-            .isBase64().withMessage(strings.RATING_IMAGE_BASE),
+            .matches(/(data:image\/[^;]+;base64[^"]+)/).withMessage(strings.RATING_IMAGE_BASE),
         check('parcelId')
             .isInt({min: 1}).withMessage(strings.RATING_PARCEL_ID_INT),
 
@@ -58,7 +58,7 @@ exports.create = {
     ],
     inDatabase: (req, res, next) => {
         return database.sequelize.transaction((t) => {
-            return Ratings.create({...req.body, image: `data:image/jpeg;base64,${req.body.image}`}, {transaction: t});
+            return Ratings.create({...req.body}, {transaction: t});
         }).then(data => {
             return res.status(201).json(data, [
                 {rel: "rating", method: "GET", href: `${req.protocol}://${req.get('host')}/api/ratings/${data.id}`}]);

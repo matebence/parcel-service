@@ -1,5 +1,6 @@
 module.exports = (app, config) => {
     const Sequelize = require("sequelize");
+    const {exec} = require('child_process');
     const strings = require('../../resources/strings');
     const redis = require("redis");
 
@@ -23,9 +24,8 @@ module.exports = (app, config) => {
     });
 
     sequelize.sync({force: config.get('node.sequelize.create-drop')}).then(result => {
-        console.log(strings.DATABASE_STRUCTURE)
+        exec("sequelize db:seed:all", (error, stdout, stderr) => console.log(strings.DATABASE_STRUCTURE));
     }).catch(error => {
-        console.log(error);
         console.log(strings.DATABASE_STRUCTURE_ERR)
     });
 

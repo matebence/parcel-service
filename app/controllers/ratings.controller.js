@@ -161,7 +161,7 @@ exports.update = {
         check('rating')
             .matches(/^[1-5]$/).withMessage(strings.RATING_RATING_MATCHES),
         check('image')
-            .isBase64().withMessage(strings.RATING_IMAGE_BASE),
+            .matches(/(data:image\/[^;]+;base64[^"]+)/).withMessage(strings.RATING_IMAGE_BASE),
         check('parcelId')
             .isInt({min: 1}).withMessage(strings.RATING_PARCEL_ID_INT),
 

@@ -10,11 +10,5 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         }
-    }, {
-        uniqueKeys: {
-            Items_unique: {
-                fields: ['name']
-            }
-        }
     });
 };

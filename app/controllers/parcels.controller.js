@@ -123,7 +123,7 @@ exports.delete = {
                 Ratings.destroy({where: {parcelId: req.params.id}}, {transaction: t})
             ]);
         }).then(num => {
-            if (num.every(number => number > 0)) {
+            if (num.some(number => number > 0)) {
                 return res.status(200).json({});
             } else {
                 return res.status(400).json({

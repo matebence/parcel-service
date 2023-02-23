@@ -39,7 +39,7 @@
     "pg-hstore": "^2.3.3",
     "redis": "^3.0.2",
     "resilient": "^0.4.0",
-    "sequelize": "^5.21.12",
+    "sequelize": "^6.28.2",
     "zipkin": "^0.22.0",
     "zipkin-context-cls": "^0.22.0",
     "zipkin-instrumentation-express": "^0.22.0",
